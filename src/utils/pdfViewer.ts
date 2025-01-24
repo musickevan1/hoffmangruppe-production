@@ -9,13 +9,20 @@ export function initPdfViewer() {
   // Clear any existing content
   container.innerHTML = '';
 
-  // Create iframe element
-  const iframe = document.createElement('iframe');
-  iframe.src = ASSETS.adImpressionsPdf;
-  iframe.style.width = '100%';
-  iframe.style.height = '800px';
-  iframe.style.border = 'none';
+  // Create object element for PDF
+  const object = document.createElement('object');
+  object.data = ASSETS.adImpressionsPdf;
+  object.type = 'application/pdf';
+  object.style.width = '100%';
+  object.style.height = '800px';
   
-  // Add iframe to container
-  container.appendChild(iframe);
+  // Add fallback message
+  const fallback = document.createElement('p');
+  fallback.textContent = 'Your browser does not support PDF viewing.';
+  fallback.style.textAlign = 'center';
+  fallback.style.marginTop = '2rem';
+  
+  // Add elements to container
+  container.appendChild(object);
+  container.appendChild(fallback);
 }
