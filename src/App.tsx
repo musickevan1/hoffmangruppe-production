@@ -1,6 +1,5 @@
 import React from 'react';
 import './styles/scroll-padding.css';
-import { initPdfViewer } from './utils/pdfViewer';
 import Navbar from './components/Navbar';
 import AnimatedSection from './components/AnimatedSection';
 import QuoteForm from './components/QuoteForm';
@@ -22,18 +21,8 @@ import {
 
 function App() {
   const [showPdf, setShowPdf] = React.useState(false);
-  const pdfInitialized = React.useRef(false);
 
   const handlePdfToggle = () => {
-    if (!pdfInitialized.current) {
-      try {
-        initPdfViewer();
-        pdfInitialized.current = true;
-      } catch (error) {
-        console.error('PDF Viewer initialization failed:', error);
-        return;
-      }
-    }
     setShowPdf(!showPdf);
   };
 
@@ -289,7 +278,12 @@ function App() {
               >
                 {showPdf ? 'Hide PDF Report' : 'Show PDF Report'}
               </button>
-              <div id="pdf-viewer" className={`w-full max-w-4xl mx-auto ${showPdf ? 'block' : 'hidden'} mt-6`}>
+              <div className={`w-full max-w-4xl mx-auto ${showPdf ? 'block' : 'hidden'} mt-6`}>
+                <iframe 
+                  src="https://hoffmangruppe.vercel.app/Ad_Impressions_2023.pdf" 
+                  className="w-full h-[800px] border-2 border-gray-200 rounded-lg"
+                  title="Ad Impressions Report"
+                />
               </div>
             </div>
           </AnimatedSection>

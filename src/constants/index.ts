@@ -22,7 +22,9 @@ import facebookLogo from '../assets/facebook-logo.png';
 import linkedinLogo from '../assets/linkedin-logo.png';
 import ssbrands from '../assets/ssbrands.jpg';
 import sanmarbrands from '../assets/sanmarbrands.jpg';
-const adImpressionsPdf = '/Ad_Impressions_2023.pdf';
+const adImpressionsPdf = import.meta.env.PROD 
+  ? `${import.meta.env.BASE_URL}Ad_Impressions_2023.pdf`
+  : '/Ad_Impressions_2023.pdf';
 
 export const ASSETS = {
   hoffmangruppeLogo,
