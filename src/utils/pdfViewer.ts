@@ -11,7 +11,7 @@ export function initPdfViewer() {
 
   // Create object element for PDF
   const object = document.createElement('object');
-  object.data = ASSETS.adImpressionsPdf;
+  object.data = '/Ad_Impressions_2023.pdf';
   object.type = 'application/pdf';
   object.style.width = '100%';
   object.style.height = '800px';
