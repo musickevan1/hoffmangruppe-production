@@ -17,6 +17,7 @@ export const PATHS = {
 import hoffmangruppeLogo from '../assets/HP logo.jpg';
 import kbLogo from '../assets/K&B.png';
 import beachBackground from '../assets/bg.jpg';
+import beachBackgroundResponsive from '../assets/bg-responsive.jpg';
 import facebookLogo from '../assets/facebook-logo.png';
 import linkedinLogo from '../assets/linkedin-logo.png';
 import ssbrands from '../assets/ssbrands.jpg';
@@ -31,5 +32,5 @@ export const ASSETS = {
   hpLogo: hoffmangruppeLogo,
   ssbrands,
   sanmarbrands,
-  bgResponsive: beachBackground
+  bgResponsive: beachBackgroundResponsive
 };
