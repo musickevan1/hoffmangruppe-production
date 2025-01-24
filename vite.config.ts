@@ -12,9 +12,6 @@ export default defineConfig({
   root: './',
   base: '/',
   plugins: [react()],
-  optimizeDeps: {
-    exclude: ['lucide-react'],
-  },
   assetsInclude: ['**/*.pdf'],
   server: {
     port: 3000,
@@ -37,7 +34,14 @@ export default defineConfig({
         chunkFileNames: '[name].js',
         assetFileNames: '[name].[ext]'
       },
-      external: []
+      external: [],
+      plugins: []
+    }
+  },
+  optimizeDeps: {
+    exclude: ['lucide-react'],
+    esbuildOptions: {
+      platform: 'browser'
     }
   }
 });
