@@ -43,19 +43,26 @@ function App() {
       {/* Hero Section */}
       <section id="home" className="relative h-screen bg-air-blue text-white">
         <div className="absolute inset-0">
-          <img
-            src={ASSETS.beachBackground}
-            alt="Background"
-            className="w-full h-full object-cover object-[center_top] opacity-20 hidden sm:block"
-          />
-          <img
-            src={ASSETS.bgResponsive}
-            alt="Background"
-            className="w-full h-full object-cover object-[center_top] opacity-20 block sm:hidden"
-          />
+          <picture>
+            <source 
+              srcSet={ASSETS.beachBackground} 
+              media="(min-width: 768px)"
+            />
+            <source
+              srcSet={ASSETS.bgResponsive}
+              media="(max-width: 767px)"
+            />
+            <img
+              src={ASSETS.bgResponsive}
+              alt="Beach background with promotional products"
+              className="w-full h-full object-cover object-[center_top] opacity-20 md:object-cover md:object-[center_top] sm:object-contain sm:object-center"
+              loading="lazy"
+              sizes="100vw"
+            />
+          </picture>
         </div>
-        <AnimatedSection className="relative h-full flex flex-col justify-start">
-          <div className="flex-1 flex flex-col justify-center items-center pt-24">
+        <AnimatedSection className="relative h-full flex flex-col justify-center">
+          <div className="flex flex-col justify-center items-center">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8">
               Your Partner in Promotional Excellence

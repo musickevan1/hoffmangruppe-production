@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 interface QuoteFormProps {
-  className?: string;
 }
 
-export default function QuoteForm({ className }: QuoteFormProps) {
+export default function QuoteForm({}: QuoteFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,10 +14,66 @@ export default function QuoteForm({ className }: QuoteFormProps) {
     quantity: '',
     explanation: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = () => {
+    if (!formData.name.trim()) return 'Name is required';
+    if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) return 'Invalid email address';
+    if (!formData.catalog) return 'Please select a catalog';
+    if (!formData.itemNumber) return 'Item number is required';
+    if (!formData.color) return 'Color is required';
+    if (!formData.quantity || Number(formData.quantity) < 1) return 'Quantity must be at least 1';
+    return '';
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+    setSuccess(false);
+
+    try {
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        catalog: formData.catalog,
+        item_number: formData.itemNumber,
+        color: formData.color,
+        quantity: formData.quantity,
+        explanation: formData.explanation
+      };
+
+      await emailjs.send(
+        'service_avwb3hh',
+        'template_u3rkfsd',
+        templateParams,
+        '33wnXH8AVSHVPPAwr'
+      );
+
+      setSuccess(true);
+      setFormData({
+        name: '',
+        email: '',
+        catalog: '',
+        itemNumber: '',
+        color: '',
+        quantity: '',
+        explanation: ''
+      });
+    } catch (err) {
+      setError('Failed to send email. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -138,12 +194,47 @@ export default function QuoteForm({ className }: QuoteFormProps) {
         />
       </div>
 
-      <button
-        type="submit"
-        className="w-full bg-air-blue text-white px-6 py-4 rounded-md hover:bg-air-blue-600 transition-colors text-lg font-medium"
-      >
-        Submit Quote Request
-      </button>
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+          {error}
+        </div>
+      )}
+
+      {success && (
+        <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md">
+          Quote request submitted successfully!
+        </div>
+      )}
+
+      <div className="flex gap-4">
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-air-blue text-white px-6 py-4 rounded-md hover:bg-air-blue-600 transition-colors text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isLoading ? 'Submitting...' : 'Submit Quote Request'}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setFormData({
+              name: '',
+              email: '',
+              catalog: '',
+              itemNumber: '',
+              color: '',
+              quantity: '',
+              explanation: ''
+            });
+            setError('');
+            setSuccess(false);
+          }}
+          className="w-1/3 bg-gray-100 text-night px-6 py-4 rounded-md hover:bg-gray-200 transition-colors text-lg font-medium"
+        >
+          Reset
+        </button>
+      </div>
     </form>
   );
 }
