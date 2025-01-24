@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { validateForm } from '@utils/validation';
 
 interface QuoteFormProps {
+  className?: string;
 }
 
 export default function QuoteForm({}: QuoteFormProps) {
@@ -18,20 +20,11 @@ export default function QuoteForm({}: QuoteFormProps) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const validateForm = () => {
-    if (!formData.name.trim()) return 'Name is required';
-    if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) return 'Invalid email address';
-    if (!formData.catalog) return 'Please select a catalog';
-    if (!formData.itemNumber) return 'Item number is required';
-    if (!formData.color) return 'Color is required';
-    if (!formData.quantity || Number(formData.quantity) < 1) return 'Quantity must be at least 1';
-    return '';
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const validationError = validateForm();
+    const validationError = validateForm(formData);
     if (validationError) {
       setError(validationError);
       return;
@@ -53,10 +46,13 @@ export default function QuoteForm({}: QuoteFormProps) {
       };
 
       await emailjs.send(
-        'service_avwb3hh',
-        'template_u3rkfsd',
-        templateParams,
-        '33wnXH8AVSHVPPAwr'
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          ...templateParams,
+          to_email: import.meta.env.VITE_EMAILJS_TEST_EMAIL
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
       setSuccess(true);
@@ -84,7 +80,8 @@ export default function QuoteForm({}: QuoteFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6" aria-labelledby="quote-form-title">
+      <h2 id="quote-form-title" className="sr-only">Quote Request Form</h2>
       <div>
         <label htmlFor="name" className="block text-base font-medium text-night mb-2">
           Name
@@ -94,10 +91,17 @@ export default function QuoteForm({}: QuoteFormProps) {
           name="name"
           id="name"
           required
+          aria-required="true"
+          aria-describedby="name-error"
           className="mt-1 block w-full rounded-md border-silver shadow-sm focus:border-air-blue focus:ring focus:ring-air-blue/20 bg-white text-night text-lg p-3"
           value={formData.name}
           onChange={handleChange}
         />
+        {error && error.includes('Name') && (
+          <span id="name-error" className="text-red-600 text-sm mt-1" role="alert">
+            {error}
+          </span>
+        )}
       </div>
 
       <div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/scroll-padding.css';
 import { initPdfViewer } from './utils/pdfViewer';
 import Navbar from './components/Navbar';
 import AnimatedSection from './components/AnimatedSection';
@@ -71,12 +72,13 @@ function App() {
               Discover our extensive range of promotional products designed to elevate your brand and make lasting impressions.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 sm:gap-6">
-              <button
-                onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white text-air-blue px-8 py-4 sm:px-8 sm:py-4 rounded-md font-medium hover:bg-gray-100 transition-colors inline-flex items-center text-lg sm:text-lg"
-              >
-                Browse Our Catalogs <ArrowRight className="ml-2 h-6 w-6 sm:h-6 sm:w-6" />
-              </button>
+                <button
+                  onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-white text-air-blue px-8 py-4 sm:px-8 sm:py-4 rounded-md font-medium hover:bg-gray-100 transition-colors flex items-center justify-center w-full sm:w-auto text-lg sm:text-lg text-center"
+                >
+                  <span>Browse Our Catalogs</span>
+                  <ArrowRight className="ml-2 h-6 w-6 sm:h-6 sm:w-6" />
+                </button>
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="border-2 border-white text-white px-8 py-4 sm:px-8 sm:py-4 rounded-md font-medium hover:bg-white hover:text-air-blue transition-colors text-lg sm:text-lg"

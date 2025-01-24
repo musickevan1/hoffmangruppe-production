@@ -4,6 +4,11 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@utils': resolve(__dirname, 'src/utils')
+    }
+  },
   root: './',
   base: '/',
   plugins: [react()],
@@ -12,14 +17,11 @@ export default defineConfig({
   },
   assetsInclude: ['**/*.pdf'],
   server: {
-    port: 5185,
-    strictPort: true,
+    port: 3000,
+    strictPort: false,
     host: '0.0.0.0',
     open: true,
-    hmr: {
-      host: 'localhost',
-      port: 5185
-    }
+    hmr: false
   },
   build: {
     outDir: 'dist',
