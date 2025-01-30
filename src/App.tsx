@@ -20,12 +20,6 @@ import {
 
 
 function App() {
-  const [showPdf, setShowPdf] = React.useState(false);
-
-  const handlePdfToggle = () => {
-    setShowPdf(!showPdf);
-  };
-
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -262,31 +256,6 @@ function App() {
             ))}
           </div>
 
-          {/* PDF Embed Section */}
-          <AnimatedSection animation="fade-up" delay={200} className="mt-12 sm:mt-16">
-            <div className="text-center mb-8 sm:mb-12">
-              <h3 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 text-air-blue">2023 Ad Impressions Report</h3>
-              <p className="text-gray-600 max-w-2xl mx-auto text-lg sm:text-xl">
-                Explore our comprehensive ad performance metrics and insights from 2023
-              </p>
-            </div>
-            <div className="flex flex-col items-center px-6 sm:px-8">
-              <button 
-                id="show-pdf" 
-                className="bg-air-blue text-white px-8 py-4 sm:px-10 sm:py-5 rounded-xl font-medium hover:bg-air-blue-600 transition-colors mb-6 text-lg sm:text-xl"
-                onClick={handlePdfToggle}
-              >
-                {showPdf ? 'Hide PDF Report' : 'Show PDF Report'}
-              </button>
-              <div className={`w-full max-w-4xl mx-auto ${showPdf ? 'block' : 'hidden'} mt-6`}>
-                <iframe 
-                  src="https://hoffmangruppe.vercel.app/Ad_Impressions_2023.pdf" 
-                  className="w-full h-[800px] border-2 border-gray-200 rounded-lg"
-                  title="Ad Impressions Report"
-                />
-              </div>
-            </div>
-          </AnimatedSection>
         </div>
       </section>
 
