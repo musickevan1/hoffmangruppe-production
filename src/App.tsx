@@ -167,20 +167,20 @@ function App() {
                 className="bg-white p-6 sm:p-8 rounded-xl shadow-lg group hover:shadow-xl transition-all"
               >
                 <div className="flex flex-col h-full p-4 sm:p-6">
-                  {item.title === "Sportswear Collection" && (
+                    {item.title === "S&S Collection" && (
                     <img
                       src={ASSETS.ssbrands}
-                      alt="Top brands featured in the Sportswear Collection"
-                      className="w-full h-48 object-cover mb-4 sm:mb-6 rounded-lg"
+                      alt="Top brands featured in the S&S Collection"
+                      className="w-full h-auto mb-4 sm:mb-6 rounded-lg"
                     />
-                  )}
-                  {item.title === "Company Casuals" && (
+                    )}
+                    {item.title === "Sanmar" && (
                     <img
                       src={ASSETS.sanmarbrands}
-                      alt="Popular brands in the Company Casuals catalog"
-                      className="w-full h-48 object-cover mb-4 sm:mb-6 rounded-lg"
+                      alt="Popular brands in the Sanmar catalog"
+                      className="w-full h-auto mb-4 sm:mb-6 rounded-lg"
                     />
-                  )}
+                    )}
                   {React.createElement(item.icon, { className: "h-8 w-8 sm:h-10 sm:w-10 text-air-blue mb-4 sm:mb-6" })}
                   <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">{item.title}</h3>
                   <p className="text-gray-600 text-lg sm:text-lg mb-4 sm:mb-6 flex-grow">{item.description}</p>

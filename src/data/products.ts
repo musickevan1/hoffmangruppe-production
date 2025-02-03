@@ -14,13 +14,13 @@ export const PRODUCTS = [
     link: 'https://kbwindjammer.com'
   },
   {
-    title: 'Sportswear Collection',
+    title: 'S&S Collection',
     description: 'Premium athletic and casual wear for your brand',
     icon: Shirt,
     link: 'https://www.sportswearcollection.com/Hoffmangruppe'
   },
   {
-    title: 'Company Casuals',
+    title: 'Sanmar',
     description: 'Professional and casual apparel for your brand',
     icon: Briefcase,
     link: 'https://www.companycasuals.com/Hoffmangruppe/start.jsp'
