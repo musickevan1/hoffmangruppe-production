@@ -1,6 +1,6 @@
-import React from 'react';
 import { ArrowRight, Package, Users, TrendingUp } from 'lucide-react';
 import { ASSETS } from '../constants';
+import InfographicCarousel from '../components/InfographicCarousel';
 
 export default function Home() {
   return (
@@ -121,6 +121,13 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Infographic Carousel Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <InfographicCarousel />
         </div>
       </section>
 

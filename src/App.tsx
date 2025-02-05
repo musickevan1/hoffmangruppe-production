@@ -5,6 +5,8 @@ import AnimatedSection from './components/AnimatedSection';
 import QuoteForm from './components/QuoteForm';
 import { ASSETS } from './constants';
 import { PRODUCTS } from './data/products';
+import InfographicCarousel from './components/InfographicCarousel';
+
 import { 
   ArrowRight, 
   ExternalLink, 
@@ -256,6 +258,11 @@ function App() {
             ))}
           </div>
 
+        </div>
+
+              {/* Infographic Carousel Section */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <InfographicCarousel />
         </div>
       </section>
 
