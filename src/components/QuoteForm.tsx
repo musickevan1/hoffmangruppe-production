@@ -130,8 +130,10 @@ export default function QuoteForm({}: QuoteFormProps) {
             onChange={handleChange}
           >
             <option value="">Select a catalog</option>
-            <option value="catalog1">Catalog 1</option>
-            <option value="catalog2">Catalog 2</option>
+            <option value="onestop">One Stop Shop</option>
+            <option value="quarterly">Quarterly Sales Flyer</option>
+            <option value="sscollection">S&S Collection</option>
+            <option value="sanmar">Sanmar</option>
             <option value="other">Other</option>
           </select>
         </div>
