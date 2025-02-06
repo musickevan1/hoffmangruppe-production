@@ -79,7 +79,7 @@ export default function Home() {
                 link: '/products/sportswear'
               },
               {
-                title: 'Sanmar',
+                title: 'Sanmar Collection',
                 image: ASSETS.sanmarbrands,
                 link: '/products/casuals'
               },

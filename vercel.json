@@ -6,8 +6,6 @@
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist",
-        "nodeVersion": "18.x",
-        "installCommand": "rm -rf node_modules package-lock.json && npm install",
         "env": {
           "VITE_EMAILJS_SERVICE_ID": "@vite_emailjs_service_id",
           "VITE_EMAILJS_TEMPLATE_ID": "@vite_emailjs_template_id",

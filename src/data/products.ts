@@ -20,7 +20,7 @@ export const PRODUCTS = [
     link: 'https://www.sportswearcollection.com/Hoffmangruppe'
   },
   {
-    title: 'Sanmar',
+    title: 'Sanmar Collection',
     description: 'Professional and casual apparel for your brand',
     icon: Briefcase,
     link: 'https://www.companycasuals.com/Hoffmangruppe/start.jsp'

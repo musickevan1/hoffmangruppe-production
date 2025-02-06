@@ -51,7 +51,7 @@ function App() {
           <div className="flex flex-col justify-center items-center">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8">
-              Your Partner in Promotional Excellence
+              Your Marketing Partner
             </h1>
             <p className="text-lg sm:text-xl mb-6 sm:mb-8 max-w-2xl">
               Discover our extensive range of promotional products designed to elevate your brand and make lasting impressions.
@@ -176,10 +176,10 @@ function App() {
                       className="w-full h-auto mb-4 sm:mb-6 rounded-lg"
                     />
                     )}
-                    {item.title === "Sanmar" && (
+                    {item.title === "Sanmar Collection" && (
                     <img
                       src={ASSETS.sanmarbrands}
-                      alt="Popular brands in the Sanmar catalog"
+                      alt="Popular brands in the Sanmar Collection catalog"
                       className="w-full h-auto mb-4 sm:mb-6 rounded-lg"
                     />
                     )}
