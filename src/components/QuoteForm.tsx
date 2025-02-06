@@ -47,7 +47,7 @@ export default function QuoteForm({ className }: QuoteFormProps) {
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
           ...templateParams,
-          to_email: import.meta.env.VITE_EMAILJS_TEST_EMAIL
+          to_email: "info@hoffmangruppe.com"
         },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
