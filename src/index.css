@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Safari-specific fixes */
+@layer utilities {
+  /* Improve Safari carousel performance */
+  .safari-fix {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+
+  /* Fix Safari flex issues */
+  .safari-flex-fix {
+    -webkit-flex: 1 0 auto;
+    flex: 1 0 auto;
+  }
+
+  /* Smooth scrolling for Safari */
+  .safari-smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fix Safari image rendering */
+  .safari-image-fix {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Ensure proper touch handling in Safari */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix Safari overflow issues */
+.overflow-hidden {
+  -webkit-overflow-scrolling: auto;
+}

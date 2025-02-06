@@ -71,7 +71,7 @@ const InfographicCarousel = ({ autoScrollInterval = 5000 }: CarouselProps) => {
   return (
     <>
       <section
-        className="relative w-full max-w-6xl mx-auto my-16 overflow-hidden min-h-[600px] bg-gray-100 p-8 border border-gray-200 rounded-lg shadow-lg"
+        className="relative w-full max-w-6xl mx-auto my-16 overflow-hidden min-h-[600px] bg-gray-100 p-8 border border-gray-200 rounded-lg shadow-lg safari-fix"
         aria-label="Promotional infographics carousel"
         onKeyDown={handleKeyDown}
         role="region"
@@ -96,10 +96,19 @@ const InfographicCarousel = ({ autoScrollInterval = 5000 }: CarouselProps) => {
       </button>
 
       <div 
-        className="flex transition-transform duration-500 ease-out h-full"
-        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+        className="flex h-full safari-flex-fix"
+        style={{ 
+          transform: `translate3d(-${activeIndex * 100}%, 0, 0)`,
+          WebkitTransform: `translate3d(-${activeIndex * 100}%, 0, 0)`,
+          transition: 'transform 500ms ease-out',
+          WebkitTransition: '-webkit-transform 500ms ease-out',
+          WebkitBackfaceVisibility: 'hidden',
+          WebkitPerspective: 1000,
+          WebkitTapHighlightColor: 'transparent'
+        }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onTouchMove={(e) => e.preventDefault()}
         role="group"
       >
         {[...Array(totalImages)].map((_, index) => (
@@ -112,9 +121,13 @@ const InfographicCarousel = ({ autoScrollInterval = 5000 }: CarouselProps) => {
             <img
               src={infographics[index]}
               alt={`Promotional infographic ${index + 1}`}
-              className="w-full h-full max-h-[500px] object-contain cursor-pointer"
-              loading="lazy"
-              decoding="async"
+              className="w-full h-full max-h-[500px] object-contain cursor-pointer safari-image-fix"
+              loading="eager"
+              decoding="sync"
+              style={{
+                WebkitUserSelect: 'none',
+                WebkitTouchCallout: 'none'
+              }}
               onClick={() => setFullscreenImage(infographics[index])}
               onError={(e) => {
                 console.error(`Error loading image ${index + 1}:`, e);
