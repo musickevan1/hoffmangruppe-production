@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import infographic1 from '../assets/infographics/infographic-1.jpg';
 import infographic2 from '../assets/infographics/infographic-2.jpg';
 import infographic3 from '../assets/infographics/infographic-3.jpg';
@@ -28,6 +28,8 @@ interface CarouselProps {
 const InfographicCarousel = ({ autoScrollInterval = 5000 }: CarouselProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
   const totalImages = 9;
 
   const nextSlide = useCallback(() => {
@@ -38,11 +40,13 @@ const InfographicCarousel = ({ autoScrollInterval = 5000 }: CarouselProps) => {
     setActiveIndex((prev) => (prev - 1 + totalImages) % totalImages);
   };
 
-  // Auto-scroll with cleanup on unmount
+  // Auto-scroll with cleanup on unmount and pause functionality
   useEffect(() => {
-    const interval = setInterval(nextSlide, autoScrollInterval);
-    return () => clearInterval(interval);
-  }, [nextSlide, autoScrollInterval]);
+    if (!isPaused) {
+      const interval = setInterval(nextSlide, autoScrollInterval);
+      return () => clearInterval(interval);
+    }
+  }, [nextSlide, autoScrollInterval, isPaused]);
 
   // Touch handling for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -65,6 +69,7 @@ const InfographicCarousel = ({ autoScrollInterval = 5000 }: CarouselProps) => {
   console.log('Infographics array:', infographics);
 
   return (
+    <>
       <section
         className="relative w-full max-w-6xl mx-auto my-16 overflow-hidden min-h-[600px] bg-gray-100 p-8 border border-gray-200 rounded-lg shadow-lg"
         aria-label="Promotional infographics carousel"
@@ -72,6 +77,24 @@ const InfographicCarousel = ({ autoScrollInterval = 5000 }: CarouselProps) => {
         role="region"
       >
       <h2 className="text-center text-2xl font-bold mb-4">Infographics</h2>
+      {/* Pause/Play Button */}
+      <button
+        onClick={() => setIsPaused(!isPaused)}
+        className="absolute top-4 right-4 z-10 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white transition-colors"
+        aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
+      >
+        {isPaused ? (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        ) : (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        )}
+      </button>
+
       <div 
         className="flex transition-transform duration-500 ease-out h-full"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -89,9 +112,10 @@ const InfographicCarousel = ({ autoScrollInterval = 5000 }: CarouselProps) => {
             <img
               src={infographics[index]}
               alt={`Promotional infographic ${index + 1}`}
-              className="w-full h-full max-h-[500px] object-contain"
+              className="w-full h-full max-h-[500px] object-contain cursor-pointer"
               loading="lazy"
               decoding="async"
+              onClick={() => setFullscreenImage(infographics[index])}
               onError={(e) => {
                 console.error(`Error loading image ${index + 1}:`, e);
                 e.currentTarget.src = 'https://via.placeholder.com/800x600?text=Image+Not+Found';
@@ -133,9 +157,32 @@ const InfographicCarousel = ({ autoScrollInterval = 5000 }: CarouselProps) => {
           />
         ))}
       </div>
-    </section>
+      </section>
 
-    
+      {/* Fullscreen Modal */}
+      {fullscreenImage && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
+          onClick={() => setFullscreenImage(null)}
+        >
+          <button
+            onClick={() => setFullscreenImage(null)}
+            className="absolute top-4 right-4 text-white bg-black/50 p-2 rounded-full hover:bg-black/70 transition-colors"
+            aria-label="Close fullscreen view"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            src={fullscreenImage || ''}
+            alt="Fullscreen view"
+            className="max-w-[90vw] max-h-[90vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </>
   );
 };
 
