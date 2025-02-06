@@ -133,7 +133,7 @@ export default function QuoteForm({ className }: QuoteFormProps) {
             <option value="onestop">One Stop Shop</option>
             <option value="quarterly">Quarterly Sales Flyer</option>
             <option value="sscollection">S&S Collection</option>
-            <option value="sanmar">SanMar Collection</option>
+            <option value="sanmar">Sanmar Collection</option>
             <option value="other">Other</option>
           </select>
         </div>
