@@ -7,6 +7,7 @@
       "config": {
         "nodeVersion": "18.x",
         "distDir": "dist",
+        "buildCommand": "chmod +x ./node_modules/.bin/vite && npm run build",
         "env": {
           "VITE_EMAILJS_SERVICE_ID": "@vite_emailjs_service_id",
           "VITE_EMAILJS_TEMPLATE_ID": "@vite_emailjs_template_id",
