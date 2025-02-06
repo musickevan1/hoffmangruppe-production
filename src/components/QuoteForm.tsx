@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { validateForm } from '@utils/validation';
+import { validateForm } from '../utils/validation';
 
 interface QuoteFormProps {
   className?: string;
 }
 
-export default function QuoteForm({}: QuoteFormProps) {
+export default function QuoteForm({ className }: QuoteFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -133,7 +133,7 @@ export default function QuoteForm({}: QuoteFormProps) {
             <option value="onestop">One Stop Shop</option>
             <option value="quarterly">Quarterly Sales Flyer</option>
             <option value="sscollection">S&S Collection</option>
-            <option value="sanmar">Sanmar Collection</option>
+            <option value="sanmar">SanMar Collection</option>
             <option value="other">Other</option>
           </select>
         </div>
