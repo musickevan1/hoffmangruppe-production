@@ -7,6 +7,7 @@
       "config": {
         "nodeVersion": "18.x",
         "distDir": "dist",
+        "buildCommand": "npx vite build",
         "env": {
           "VITE_EMAILJS_SERVICE_ID": "@vite_emailjs_service_id",
           "VITE_EMAILJS_TEMPLATE_ID": "@vite_emailjs_template_id",
